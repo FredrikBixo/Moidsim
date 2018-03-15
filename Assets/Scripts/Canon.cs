@@ -18,17 +18,22 @@ public class Canon : MonoBehaviour {
 			GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
 			// Add euler angles
-			print (transform.position);
+		//	print (transform.position);
 			sphere.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z+3);
 			sphere.AddComponent<Ball>(); 
 			sphere.AddComponent<SphereCollider> ();
 			sphere.GetComponent<Ball>().initialVelocityVector = transform.up*50;
 			sphere.GetComponent<Ball> ().initialPos = transform.position;
-			sphere.GetComponent<Ball> ().a0 = Mathf.Atan2 (transform.up.y, transform.up.z); 
-			sphere.GetComponent<Ball> ().x0 = Mathf.Atan2 (transform.up.x, transform.up.z); 
-			//Instantiate(sphere);
+			//sphere.GetComponent<Ball> ().x = transform.position.z;
+			//sphere.GetComponent<Ball> ().y = transform.position.y;
+			float a0 = Mathf.Atan2 (transform.up.y, transform.up.z); 
+			sphere.GetComponent<Ball> ().x0 = Mathf.Atan2 (transform.up.x, transform.up.z);
+			float inputSpeed = 60;
+			sphere.GetComponent<Ball> ().init (a0, inputSpeed);
+			sphere.GetComponent<Ball> ().calculateTrajectory ();
 
 		}
 			
 	}
+
 }
